@@ -13,13 +13,13 @@ Todo BackEnd:
   ✔ Adicionar o Contexto ao Startup @done(20-02-03 13:42)
   ✔ Gerar a migration das tabelas @done(20-02-03 13:42)
   ✔ aplicar na produtcao a migration @done(20-02-03 13:42)
-  ☐ criar o GIT
-  ☐ .gitignore
-  ☐ comecar a commitar por etapas
-  ☐ Gerar o patter Repository Generic
-  ☐ Gerar o pattern para Cada Entidade seu priprio repositorio
-  ☐ Gerar o AutoMapper para as classes
-  ☐ Limpar um pouco a startp
+  ✔ criar o GIT @done(20-02-03 13:45)
+  ✔ .gitignore @done(20-02-03 13:45)
+  ✔ comecar a commitar por etapas @done(20-02-03 13:45)
+  ✔ Gerar o patter Repository Generic @done(20-02-03 14:34)
+  ✔ Gerar o pattern para Cada Entidade seu priprio repositorio @done(20-02-03 14:45)
+  ✔ Gerar o AutoMapper para as classes @done(20-02-03 14:51)
+  ✔ Limpar um pouco a startp @done(20-02-03 15:03)
   ☐ Criar as Services para as Entididades
   ☐ Base Sericse
   ☐ Interface Especializada services
