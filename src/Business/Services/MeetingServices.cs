@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Models;
+using Business.Notifications;
 using Business.Validations;
 
 namespace Business.Services {
@@ -12,7 +13,7 @@ namespace Business.Services {
 
         private IMeetingRepository _meeting;
 
-        public MeetingServices (IMeetingRepository meetingRepository) {
+        public MeetingServices (IMeetingRepository meetingRepository, INotificador notificador) : base (notificador) {
             _meeting = meetingRepository;
         }
 
