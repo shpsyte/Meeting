@@ -1,5 +1,6 @@
 using AutoMapper;
 using Business.Interfaces;
+using Business.Notifications;
 using Data.Context;
 using Data.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace WebApp.Configs {
 
             services.AddScoped<AppDbContext> ();
             services.AddScoped<IMeetingRepository, MeetingRepository> ();
+            services.AddScoped<INotificador, Notificador> ();
             services.AddAutoMapper (typeof (Startup));
 
             return services;
