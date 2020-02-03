@@ -20,11 +20,11 @@ Todo BackEnd:
   ✔ Gerar o pattern para Cada Entidade seu priprio repositorio @done(20-02-03 14:45)
   ✔ Gerar o AutoMapper para as classes @done(20-02-03 14:51)
   ✔ Limpar um pouco a startp @done(20-02-03 15:03)
-  ☐ Criar as Services para as Entididades
-  ☐ Base Sericse
-  ☐ Interface Especializada services
-  ☐ Implementar Validacaoes de Negocios
-  ☐ Implementar EVentos de Notifcacaco
+  ✔ Criar as Services para as Entididades @done(20-02-03 15:22)
+  ✔ Base Sericse @done(20-02-03 15:22)
+  ✔ Interface Especializada services @done(20-02-03 15:22)
+  ✔ Implementar Validacaoes de Negocios @done(20-02-03 15:22)
+  ✔ Implementar EVentos de Notifcacaco @done(20-02-03 15:22)
   ☐ Implementar Eveneto para notificao no frontend
   ☐ IMplementar Trantamento de ERrro
   ☐ IMplementar Classes para seguranca

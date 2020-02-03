@@ -1,15 +1,16 @@
 using Business.Models;
+using Business.Notifications;
 using FluentValidation;
 using FluentValidation.Results;
 
 namespace Business.Services {
     public abstract class BaseServices {
 
-        // private readonly INotificador _notificador;
+        private readonly INotificador _notificador;
 
-        // protected BaseServices (INotificador notifiador) {
-        //     _notificador = notifiador;
-        // }
+        protected BaseServices (INotificador notifiador) {
+            _notificador = notifiador;
+        }
 
         protected void Notificar (ValidationResult validationResult) {
             foreach (var error in validationResult.Errors) {
@@ -19,7 +20,7 @@ namespace Business.Services {
         }
 
         protected void Notificar (string message) {
-            // _notificador.Handle (new Notificacao (message));
+            _notificador.Handle (new Notificacao (message));
 
         }
 
@@ -28,7 +29,7 @@ namespace Business.Services {
 
             if (validator.IsValid) return true;
 
-            //Notificar (validator);
+            Notificar (validator);
             return false;
 
         }
