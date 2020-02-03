@@ -1,0 +1,46 @@
+
+Todo BackEnd:
+  
+  ✔ Setup das Pastas do Projeto @done(20-02-03 13:18)
+  ✔ Adicionar os Projetos (principal, e Dlls) @done(20-02-03 13:19)
+  ✔ Adicioanr os projetos a SLN @done(20-02-03 13:20)
+  ✔ Adicionar o IdentityTable @done(20-02-03 13:24)
+  ✔ Customizar IdentityTable Tables @done(20-02-03 13:24)
+  ✔ Criar a Migracao do Identity @done(20-02-03 13:26)
+  ✔ Criar o Model @done(20-02-03 13:34)
+  ✔ Criar o Mapping do Model @done(20-02-03 13:34)
+  ✔ Imporatr para MeuDbContext @done(20-02-03 13:42)
+  ✔ Adicionar o Contexto ao Startup @done(20-02-03 13:42)
+  ✔ Gerar a migration das tabelas @done(20-02-03 13:42)
+  ✔ aplicar na produtcao a migration @done(20-02-03 13:42)
+  ☐ criar o GIT
+  ☐ .gitignore
+  ☐ comecar a commitar por etapas
+  ☐ Gerar o patter Repository Generic
+  ☐ Gerar o pattern para Cada Entidade seu priprio repositorio
+  ☐ Gerar o AutoMapper para as classes
+  ☐ Limpar um pouco a startp
+  ☐ Criar as Services para as Entididades
+  ☐ Base Sericse
+  ☐ Interface Especializada services
+  ☐ Implementar Validacaoes de Negocios
+  ☐ Implementar EVentos de Notifcacaco
+  ☐ Implementar Eveneto para notificao no frontend
+  ☐ IMplementar Trantamento de ERrro
+  ☐ IMplementar Classes para seguranca
+
+
+Todo FrontEnd:
+  ☐ Gerar os controllers
+  ☐ Arrumar o controller
+  ☐ Gerar a View
+  ☐ Arrumar a View 1st 
+
+Todo FronEnd Design:
+   ☐ Alterar o designed do site
+
+Todo Deploy:
+  ☐ Deploy da Aplicacao
+
+
+  
