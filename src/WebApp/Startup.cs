@@ -38,7 +38,8 @@ namespace WebApp {
                 app.UseDeveloperExceptionPage ();
                 app.UseDatabaseErrorPage ();
             } else {
-                app.UseExceptionHandler ("/Home/Error");
+                app.UseExceptionHandler ("/Home/500");
+                app.UseStatusCodePagesWithReExecute ("/Home/{0}");
                 app.UseHsts ();
             }
 
