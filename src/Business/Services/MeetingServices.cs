@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using AutoMapper;
 using Business.Interfaces;
 using Business.Models;
 using Business.Notifications;
@@ -27,8 +28,11 @@ namespace Business.Services {
             await _meeting.Delete (entity);
         }
 
-        public async Task<IEnumerable<Meeting>> GetAll () {
-            return await _meeting.GetAll ();
+        public async Task<IEnumerable<T>> GetAll<T> () {
+            IMapper map = new Mapper (null);
+
+            var res = map.Map<IEnumerable<T>> (await _meeting.GetAll ());
+            return res;
         }
 
         public async Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where) {

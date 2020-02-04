@@ -16,7 +16,7 @@ namespace WebApp.Controllers {
             return View ();
         }
 
-        [Route ("you-get-an-error/{id:lenght(3,3)}")]
+        [Route ("you-get-an-error/{id}")]
         public IActionResult Error (int id) {
             var error = new ErrorViewModel () {
                 ErrorCode = id,
