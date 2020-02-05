@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Business.Notifications;
 using Business.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,14 +11,20 @@ using WebApp.ViewModels;
 namespace WebApp.Controllers {
     public class MeetingController : BaseController {
         private readonly IMeetingServices _meeting;
+        private readonly IMeetingSetupServices _meetingSetup;
 
-        public MeetingController (IMeetingServices meeting, IMapper mapper, ILogger looger) : base (mapper, looger) {
+        public MeetingController (IMeetingSetupServices meetingSetup,
+            IMeetingServices meeting,
+            IMapper mapper,
+            ILogger<MeetingController> looger,
+            INotificador notificador) : base (mapper, looger, notificador) {
             _meeting = meeting;
+            _meetingSetup = meetingSetup;
         }
 
         public async Task<IActionResult> Index () {
-            var data = _mapper.Map<MeetingViewModel> (await _meeting.GetAll ());
-            return View ();
+            var data = _mapper.Map<IEnumerable<MeetingViewModel>> (await _meeting.GetAll ());
+            return View (data);
 
         }
 

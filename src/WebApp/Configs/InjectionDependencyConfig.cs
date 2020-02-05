@@ -7,18 +7,22 @@ using Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace WebApp.Configs {
     public static class InjectionDependencyConfig {
         public static IServiceCollection AddInjectionDependency (this IServiceCollection services) {
 
+            services.AddAutoMapper (typeof (Startup));
+            services.AddLogging ();
+
             services.AddScoped<AppDbContext> ();
             services.AddScoped<IMeetingRepository, MeetingRepository> ();
             services.AddScoped<IMeetingSetupRepository, MeetingSetupRepository> ();
             services.AddScoped<IMeetingServices, MeetingServices> ();
+            services.AddScoped<IMeetingSetupServices, MeetingSetupServices> ();
 
             services.AddScoped<INotificador, Notificador> ();
-            services.AddAutoMapper (typeof (Startup));
 
             return services;
         }

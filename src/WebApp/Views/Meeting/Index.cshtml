@@ -1,8 +1,5 @@
-@model IEnumerable<WebApp.ViewModels.MeetingViewModel>
-
-@{
-    ViewData["Title"] = "Index";
-}
+@model IEnumerable<MeetingViewModel>
+ 
 
 <h1>Index</h1>
 
@@ -43,9 +40,9 @@
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Guid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Guid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Guid">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

@@ -1,4 +1,12 @@
 ﻿@using WebApp
 @using WebApp.ViewModels
+@using WebApp.Extensions
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper "*,WebApp"
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
