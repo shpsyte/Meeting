@@ -6,6 +6,7 @@ namespace WebApp.Configs {
     public class AutoMapperConfig : Profile {
         public AutoMapperConfig () {
             CreateMap<Meeting, MeetingViewModel> ().ReverseMap ();
+            CreateMap<MeetingSetup, MeetingSetupViewModel> ().ReverseMap ();
 
         }
 

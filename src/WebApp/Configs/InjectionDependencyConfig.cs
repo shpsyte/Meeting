@@ -14,6 +14,7 @@ namespace WebApp.Configs {
 
             services.AddScoped<AppDbContext> ();
             services.AddScoped<IMeetingRepository, MeetingRepository> ();
+            services.AddScoped<IMeetingSetupRepository, MeetingSetupRepository> ();
             services.AddScoped<IMeetingServices, MeetingServices> ();
 
             services.AddScoped<INotificador, Notificador> ();

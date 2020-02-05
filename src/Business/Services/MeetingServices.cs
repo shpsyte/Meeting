@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AutoMapper;
 using Business.Interfaces;
 using Business.Models;
 using Business.Notifications;
@@ -12,10 +11,11 @@ using Business.Validations;
 namespace Business.Services {
     public class MeetingServices : BaseServices, IMeetingServices {
 
-        private IMeetingRepository _meeting;
+        private readonly IMeetingRepository _meeting;
 
         public MeetingServices (IMeetingRepository meetingRepository, INotificador notificador) : base (notificador) {
             _meeting = meetingRepository;
+
         }
 
         public async Task Add (Meeting entity) {
@@ -28,11 +28,9 @@ namespace Business.Services {
             await _meeting.Delete (entity);
         }
 
-        public async Task<IEnumerable<T>> GetAll<T> () {
-            IMapper map = new Mapper (null);
+        public async Task<IEnumerable<Meeting>> GetAll () {
 
-            var res = map.Map<IEnumerable<T>> (await _meeting.GetAll ());
-            return res;
+            return await _meeting.GetAll ();
         }
 
         public async Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where) {
@@ -54,5 +52,6 @@ namespace Business.Services {
         public async Task Update (Meeting entity) {
             await _meeting.Update (entity);
         }
+
     }
 }

@@ -12,7 +12,7 @@ namespace Business.Services {
         Task Delete (Meeting entity);
 
         Task<Meeting> GetById (Guid id);
-        Task<IEnumerable<Meeting>> GetAll<T> ();
+        Task<IEnumerable<Meeting>> GetAll ();
         Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where);
         Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where = null, Func<IQueryable<Meeting>, IOrderedQueryable<Meeting>> orderBy = null,
             string includeProperties = "");

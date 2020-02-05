@@ -1,25 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Business.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using WebApp.Data;
+using Microsoft.Extensions.Logging;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers {
-    public class MeetingController : Controller {
+    public class MeetingController : BaseController {
         private readonly IMeetingServices _meeting;
 
-        public MeetingController (IMeetingServices meeting) {
+        public MeetingController (IMeetingServices meeting, IMapper mapper, ILogger looger) : base (mapper, looger) {
             _meeting = meeting;
         }
 
         public async Task<IActionResult> Index () {
-            var data = await _meeting.GetAll<MeetingViewModel> ();
-            return View (data);
+            var data = _mapper.Map<MeetingViewModel> (await _meeting.GetAll ());
+            return View ();
 
         }
 
