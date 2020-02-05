@@ -3,64 +3,51 @@
 
 // Write your JavaScript code.
 
-let btn = document.querySelector("#entrar");
+function SendParticipantToServer() {
+  let btn = document.querySelector("#sent");
 
-btn.addEventListener("click", function() {
-  console.log("Preventing Default behaior");
-  event.preventDefault();
+  if (btn === null) return;
 
-  let url = this.getAttribute("data-url");
-  DoSomething();
-  //var token = GetAntiXsrfRequestToken(); // this.getAttribute("data-token");
-  //console.log(token);
-});
+  btn.addEventListener("click", function() {
+    event.preventDefault();
 
-function DoSomething() {
-  var token = document.querySelector("input[name=__RequestVerificationToken]")
-    .value;
+    let url = btn.getAttribute("data-url");
+    let token = document.querySelector("input[name=__RequestVerificationToken]")
+      .value;
+    let email = document.querySelector("#Email").value;
+    let name = document.querySelector("#Name").value;
+    let data = { email, name };
 
-  let parametros = {
-    name: "jose luiz",
-    email: "jose@jose"
-  };
+    if (email === "") {
+      document.querySelector("span[data-valmsg-for='Email']").innerHTML =
+        "This field is required";
+      return;
+    }
 
-  // $.ajax({
-  //   type: "POST",
-  //   headers: {
-  //     RequestVerificationToken: token
-  //   },
-  //   url: "/Home/CreateParticipant/",
-  //   data: parametros,
-  //   error: function(data) {
-  //     console.log(data);
-  //   },
-  //   success: function(data) {
-  //     console.log(data);
-  //   },
-  //   dataType: "json"
-  // });
+    console.log("Posting data....", data);
 
-  // return;
+    _post(url, token, data);
+  });
+}
 
-  // let formData = new FormData();
-  // formData.append("name", "John");
-  // formData.append("password", "John123");
-
-  // fetch("/Home/CreateParticipant/", {
-  //   headers: {
-  //     RequestVerificationToken: token
-  //   },
-  //   method: "post",
-  //   body: formData //JSON.stringify(parametros)
-  // })
-  //   //  .then(response => this._handleErrors(response))
-  //   .then(res => res.json())
-  //   .then(data => console.log(data));
-
-  // _handleErrors(response) {
-  //   if (response.ok) {
-  //     return response;
-  //   }
-  //   return new Error(response.stautsText);
-  // }
+function _post(url, token, data) {
+  $.ajax({
+    type: "POST",
+    headers: {
+      RequestVerificationToken: token
+    },
+    url: url,
+    data: data,
+    error: function(data) {
+      console.log(data);
+    },
+    success: function(data) {
+      if (data.success) {
+        console.log("Sucesso -> Faz alguma coisa", data);
+      } else {
+        console.log("Erro -> Faz alguma coisa", data);
+      }
+    },
+    dataType: "json"
+  });
 }

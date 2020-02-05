@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Business.Extensions;
 using Business.Interfaces;
 using Business.Models;
 using Business.Notifications;
@@ -20,6 +21,12 @@ namespace Business.Services {
 
         public async Task Add (Meeting entity) {
             if (!ExecutarValidacao (new MeetingValidation (), entity)) return;
+
+            //Valid if the exists the same email in this day
+            var any = (await _meeting.GetAll (a => a.Email == entity.Email && a.Data.ToSql () == DateTime.Now.ToSql ())).Any ();
+            if (any) {
+                Notificar ("This Email is already registered");
+            }
 
             await _meeting.Add (entity);
         }
@@ -51,6 +58,10 @@ namespace Business.Services {
 
         public async Task Update (Meeting entity) {
             await _meeting.Update (entity);
+        }
+
+        public void Dispose () {
+            _meeting?.Dispose ();
         }
 
     }

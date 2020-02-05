@@ -1,23 +1,32 @@
 ﻿@model MeetingViewModel 
   
+    <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" data-url="@Url.Action("CreateParticipant", "Home")" value="Create" id="sent" class="btn btn-primary" />
+            </div>
+        </form>
 
- <form method="post" asp-antiforgery="true" class="form-horizontal">
-  <input type="hidden" asp-for="Data" />
-  
-  <label for="Name">Name</label>
-  <input type="text" asp-for="Name" />
-  <br><Br>
-  <label for="Email">Email</label>
-  <input type="email" asp-for="Email" />
-  <br><Br>
-  <input  type="checkbox" asp-for="Active" /> Ativo
-
-  <Br>
  
- 
-  <button data-url="@Url.Action("CreateParticipant", "Home")" type="submit" id="entrar">Entrar</button>
-</form>
-
 @section Scripts {
-    
+      @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+      <script>
+          SendParticipantToServer()
+     </script>
 }

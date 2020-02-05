@@ -16,6 +16,7 @@ namespace WebApp.ViewModels {
         public string Name { get; set; }
 
         [Required]
+        [DataType (DataType.EmailAddress)]
         public string Email { get; set; }
         public bool Active { get; set; }
     }

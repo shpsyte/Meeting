@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Business.Models;
 
 namespace Business.Services {
-    public interface IMeetingServices {
+    public interface IMeetingServices : IDisposable {
         Task Add (Meeting entity);
         Task Update (Meeting entity);
         Task Delete (Meeting entity);

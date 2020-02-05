@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using Business.Notifications;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,10 @@ namespace WebApp.Controllers {
 
         public bool OperacaoValida () {
             return !_notificador.TemNotificacao ();
+        }
+
+        public List<Notificacao> ErrorInModel () {
+            return _notificador.ObterNotificacao ();
         }
 
     }

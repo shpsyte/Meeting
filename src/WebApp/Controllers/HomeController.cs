@@ -30,15 +30,19 @@ namespace WebApp.Controllers {
             ModelState.Remove ("Data");
             ModelState.Remove ("Id");
 
-            if (!ModelState.IsValid)
-                return Json (new { sucess = false, data = meetingViewModel });
+            if (!ModelState.IsValid) return Json (new {
+                success = false, errors = ErrorInModel (), data = meetingViewModel, atualmetting = ""
+            });
 
             await _meetingServices.Add (_mapper.Map<Meeting> (meetingViewModel));
 
-            if (!OperacaoValida ())
-                return Json (new { sucess = false, data = meetingViewModel });
+            if (!OperacaoValida ()) return Json (new {
+                success = false, errors = ErrorInModel (), data = meetingViewModel, atualmetting = ""
+            });
 
-            return Json (new { sucess = true, data = meetingViewModel });
+            return Json (new {
+                success = true, data = meetingViewModel, atualmetting = await _meetingSetupServices.GetAtualMeeting ()
+            });
 
         }
 

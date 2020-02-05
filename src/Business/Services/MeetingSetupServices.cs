@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Business.Extensions;
 using Business.Interfaces;
 using Business.Models;
 using Business.Notifications;
@@ -32,6 +33,10 @@ namespace Business.Services {
             return await _meettingSetup.GetAll ();
         }
 
+        public async Task<MeetingSetup> GetAtualMeeting () {
+            return (await GetAll (a => a.Data.ToSql () == DateTime.Now.ToSql ())).FirstOrDefault ();
+        }
+
         public async Task<IEnumerable<MeetingSetup>> GetAll (Expression<Func<MeetingSetup, bool>> where) {
             return await _meettingSetup.GetAll (where);
         }
@@ -51,5 +56,10 @@ namespace Business.Services {
         public async Task Update (MeetingSetup entity) {
             await _meettingSetup.Update (entity);
         }
+
+        public void Dispose () {
+            _meettingSetup?.Dispose ();
+        }
+
     }
 }
