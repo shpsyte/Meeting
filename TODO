@@ -34,11 +34,14 @@ Todo FrontEnd:
   ✔ Gerar os controllers @done(20-02-05 13:28)
   ✔ Arrumar o controller @done(20-02-05 13:28)
    ☐ Gerar a Tela Adm
-      ☐ Desenhar o esqueleto da tela
-      ☐ Criar a opção de Criar o link no Database
-      ☐ Alterar ou Criar o link desejado
-      ☐ Pegar a listagem de participantes do dia
-
+      ✔ Desenhar o esqueleto da tela @done(20-02-06 08:30)
+      ✔ Criar a opção de Criar o link no Database @done(20-02-06 08:30)
+      ✔ Alterar ou Criar o link desejado @done(20-02-06 08:30)
+      ✔ Pegar a listagem de participantes do dia @done(20-02-06 08:30)
+      Criacao de Link nao esta funcionando
+      Criar de participantes não esta funcionando
+      Chamar os participantes 1x de forma automatica
+      
    
 
 Todo FronEnd Design:
@@ -47,5 +50,9 @@ Todo FronEnd Design:
 Todo Deploy:
   ☐ Deploy da Aplicacao
 
+
+
+Todo Adjust
+  Quando chama os participantes sem nenhum obje, mostrar uma mensagem na tela
 
   

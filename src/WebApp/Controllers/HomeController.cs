@@ -14,7 +14,12 @@ namespace WebApp.Controllers {
 
         private readonly IMeetingServices _meetingServices;
         private readonly IMeetingSetupServices _meetingSetupServices;
-        public HomeController (IMeetingServices meetingServices, IMeetingSetupServices meetingSetupServices, IMapper mapper, ILogger<BaseController> looger, INotificador notificador) : base (mapper, looger, notificador) {
+
+        // TODO:  Create a class to inject here... too much inject....
+        public HomeController (IMeetingServices meetingServices,
+            IMeetingSetupServices meetingSetupServices,
+            IMapper mapper,
+            ILogger<BaseController> looger, INotificador notificador) : base (mapper, looger, notificador) {
             _meetingServices = meetingServices;
             _meetingSetupServices = meetingSetupServices;
         }
@@ -31,6 +36,7 @@ namespace WebApp.Controllers {
             var meetingSetup = await _meetingSetupServices.GetAtualMeeting ();
 
             ///TODO: Refatorar, muita regra aqui
+            // is this a controller or a Business Layer ?????
 
             if (!ModelState.IsValid) {
                 meetingSetup.Link = "";
@@ -66,6 +72,11 @@ namespace WebApp.Controllers {
 
             var meetingSetupPreviously = await _meetingSetupServices.GetAtualMeeting ();
 
+            // TODO: Refatorar
+            // too much if here!
+            // controller should have many resp... 
+            // if something change in other part can broker this code
+
             if (meetingSetupPreviously != null) {
                 meetingSetupPreviously.Link = meetingSetup.Link;
                 await _meetingSetupServices.Update (meetingSetupPreviously);
@@ -86,14 +97,13 @@ namespace WebApp.Controllers {
 
         }
 
-        [HttpGet]
         public async Task<JsonResult> GetParticipants () {
-            var listOfParticipants = await _meetingServices.GetAllParticipantsToday ();
-            return Json (new { success = true, data = listOfParticipants });
+            return Json (new { success = true, data = (await _meetingServices.GetAllParticipantsToday ()) });
         }
 
         [Route ("you-get-an-error/{id}")]
         public IActionResult Error (int id) {
+            // TODO: Correct this one
             var error = new ErrorViewModel () {
                 ErrorCode = id,
                 Title = "Title",
