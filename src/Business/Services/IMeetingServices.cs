@@ -11,6 +11,8 @@ namespace Business.Services {
         Task Update (Meeting entity);
         Task Delete (Meeting entity);
 
+        Task<Meeting> GetNewMeeting();
+
         Task<Meeting> GetById (Guid id);
         Task<IEnumerable<Meeting>> GetAll ();
         Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where);

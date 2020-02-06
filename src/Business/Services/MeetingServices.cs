@@ -72,5 +72,16 @@ namespace Business.Services {
             return (await GetAll (a => a.Data.ToSql () == DateTime.Now.ToSql ()));
         }
 
+        public async Task<Meeting> GetNewMeeting () {
+            var data = await Task.FromResult (
+                new Meeting () {
+                    Data = DateTime.UtcNow,
+                        Id = Guid.NewGuid ()
+                }
+            );
+
+            return data;
+        }
+
     }
 }

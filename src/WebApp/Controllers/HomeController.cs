@@ -33,18 +33,18 @@ namespace WebApp.Controllers {
 
             ModelState.Remove ("Data");
             ModelState.Remove ("Id");
-            var meetingSetup = await _meetingSetupServices.GetAtualMeeting ();
+            var meetingSetup =
+                (await _meetingSetupServices.GetAtualMeeting ()) ?? new MeetingSetup ();
 
             ///TODO: Refatorar, muita regra aqui
             // is this a controller or a Business Layer ?????
-
             if (!ModelState.IsValid) {
-                meetingSetup.Link = "";
                 return Json (new {
                     success = false, errors = ErrorInModel (), data = meetingViewModel, atualmetting = ""
                 });
             }
 
+            /// TODO: should be in Services
             if (await _meetingServices.CheckIfIsAlreadyRegistered (_mapper.Map<Meeting> (meetingViewModel))) {
                 return Json (new {
                     success = true, data = meetingViewModel, atualmetting = meetingSetup
@@ -54,7 +54,9 @@ namespace WebApp.Controllers {
             await _meetingServices.Add (_mapper.Map<Meeting> (meetingViewModel));
 
             if (!OperacaoValida ()) return Json (new {
-                success = false, errors = ErrorInModel (), data = meetingViewModel, atualmetting = ""
+                success = false, errors = ErrorInModel (),
+                    data = meetingViewModel,
+                    atualmetting = ""
             });
 
             return Json (new {
@@ -81,9 +83,8 @@ namespace WebApp.Controllers {
                 meetingSetupPreviously.Link = meetingSetup.Link;
                 await _meetingSetupServices.Update (meetingSetupPreviously);
             } else {
-                var dataSmeetingSetup = new MeetingSetup () {
-                    Link = meetingSetup.Link
-                };
+                var dataSmeetingSetup = await _meetingSetupServices.GetNewMeetingSetup ();
+                dataSmeetingSetup.Link = meetingSetup.Link;
                 await _meetingSetupServices.Add (dataSmeetingSetup);
             }
 

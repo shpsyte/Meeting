@@ -33,19 +33,20 @@ function error(data) {
 }
 
 function SuccessSendParticipantToServer(data) {
+  console.log(data);
   let errors = document.querySelector("#errors");
-  if (data.success) {
-    errors.innerHTML = data.atualmetting.link;
-  } else {
-    errors.innerHTML = "The link will be provide, please wait...";
-  }
+  let link =
+    data.atualmetting.link === null
+      ? "The link will be provide, please wait..."
+      : data.atualmetting.link;
+
+  errors.innerHTML = link;
 }
 
 /* Regras para o servidor */
 
 function CreateLinkToServer() {
   let btn = document.querySelector("#sent");
-
   if (btn === null) return;
 
   btn.addEventListener("click", function() {
@@ -62,28 +63,38 @@ function CreateLinkToServer() {
   });
 }
 
+function CreateBindToGetParticipants() {
+  let btn = document.querySelector("#getparticipants");
+  btn.setAttribute("disabled", "disabled");
+
+  setTimeout(GetParticipants, 2000);
+  btn.addEventListener("click", () => {
+    event.preventDefault();
+    GetParticipants();
+  });
+}
+
 function SuccessCreateLinkToServer(data) {
   let link = document.querySelector("#Link");
   let errors = document.querySelector("#errors");
   if (data.success) {
-    errors.textContent = "Link create/updated with success";
+    errors.innerHTML = "Link create/updated with success";
     link.value = data.meetingSetup.link;
   } else {
-    errors.textContent = data.errors[0].message;
-    console.log("Algo deu errado --> ", data.errors[0].message);
+    errors.innerHTML = data.errors[0].message;
+    // console.log("Algo deu errado --> ", data.errors[0].message);
   }
 }
 
 function GetParticipants() {
   let btn = document.querySelector("#getparticipants");
 
-  if (btn === null) return;
+  btn.setAttribute("disabled", "disabled");
 
-  btn.addEventListener("click", function() {
-    event.preventDefault();
-    let url = "/Home/GetParticipants/";
-    _get(url, SuccessGetParticipantes, error);
-  });
+  let url = "/Home/GetParticipants/";
+  _get(url, SuccessGetParticipantes, error);
+
+  btn.removeAttribute("disabled");
 }
 
 function SuccessGetParticipantes(data) {

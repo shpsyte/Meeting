@@ -3,9 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.ViewModels {
     public class MeetingViewModel {
+
         public MeetingViewModel () {
-            Data = DateTime.UtcNow;
-            Active = true;
+            this.Id = Guid.NewGuid();
+
+            this.Data = DateTime.UtcNow;
         }
 
         [Key]

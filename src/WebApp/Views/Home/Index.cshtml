@@ -1,13 +1,16 @@
 ﻿@model MeetingViewModel 
   
     <form asp-action="Create">
-            
+            <div>
+                <span class="text-success" id="errors"></span>
+            </div>
              
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -15,12 +18,11 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    <input class="form-check-input" asp-for="Active" checked /> @Html.DisplayNameFor(model => model.Active)
                 </label>
             </div>
-            <div class="link">
-                <span class="text-success" id="errors"></span>
-            </div>
+
+          
 
             <hr>
             

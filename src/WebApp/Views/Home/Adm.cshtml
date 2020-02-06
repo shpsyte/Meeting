@@ -6,7 +6,9 @@
    
     <div class="side">
         <div class="admin">
-            <div id="errors"  class="text-danger"></div>
+            <div>
+                <span class="text-success" id="errors"></span>
+            </div>
             <form Action="Create" asp-antiforgery="true" >
                  
                 <div class="control">
@@ -17,7 +19,7 @@
                     </div>
                 </div>
             </form>
-            <input type="button"  value="Get" id="getparticipants" class="btn btn-primary" />
+            <input type="button" value="Get" id="getparticipants" class="btn btn-primary" />
         </div>
     </div>
 
@@ -34,8 +36,6 @@
       @* @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} *@
       <script>
           CreateLinkToServer()
-          GetParticipants();
-
-          
+           CreateBindToGetParticipants();
      </script>
 }
