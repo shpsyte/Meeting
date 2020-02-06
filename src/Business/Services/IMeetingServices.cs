@@ -16,6 +16,8 @@ namespace Business.Services {
         Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where);
         Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where = null, Func<IQueryable<Meeting>, IOrderedQueryable<Meeting>> orderBy = null,
             string includeProperties = "");
+        Task<bool> CheckIfIsAlreadyRegistered (Meeting entity);
+        Task<IEnumerable<Meeting>> GetAllParticipantsToday ();
 
         Task<int> SaveChanges ();
 

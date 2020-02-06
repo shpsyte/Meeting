@@ -64,5 +64,13 @@ namespace Business.Services {
             _meeting?.Dispose ();
         }
 
+        public async Task<bool> CheckIfIsAlreadyRegistered (Meeting entity) {
+            return (await GetAll (a => a.Data.ToSql () == DateTime.Now.ToSql () && a.Email == entity.Email)).Any ();
+        }
+
+        public async Task<IEnumerable<Meeting>> GetAllParticipantsToday () {
+            return (await GetAll (a => a.Data.ToSql () == DateTime.Now.ToSql ()));
+        }
+
     }
 }

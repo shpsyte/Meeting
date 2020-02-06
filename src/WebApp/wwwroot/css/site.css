@@ -26,7 +26,7 @@ html {
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
 
 button.accept-policy {
@@ -53,4 +53,30 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+main {
+  width: 100%;
+}
+
+.side {
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.admin {
+  background: #f0fcf8;
+  padding: 15px;
+}
+
+.participantes {
+  background: #a9e4d0;
+  padding: 15px;
 }

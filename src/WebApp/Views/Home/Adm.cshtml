@@ -1,0 +1,41 @@
+﻿@model MeetingSetupViewModel 
+ 
+
+
+<div class="container">
+   
+    <div class="side">
+        <div class="admin">
+            <div id="errors"  class="text-danger"></div>
+            <form Action="Create" asp-antiforgery="true" >
+                 
+                <div class="control">
+                    <div class="form-group">
+                        <label asp-for="Link" class="control-label"></label>
+                        <input asp-for="Link"  class="form-control" />
+                        <input type="submit" data-url="@Url.Action("CreateLinkMeeting", "Home")" value="Create" id="sent" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+            <input type="button"  value="Get" id="getparticipants" class="btn btn-primary" />
+        </div>
+    </div>
+
+     <div class="side">
+         <div class="participantes"> 
+            <ul id="participants"> </ul>
+        </div>
+    </div>
+    
+</div>
+
+
+@section Scripts {
+      @* @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} *@
+      <script>
+          CreateLinkToServer()
+          GetParticipants();
+
+          
+     </script>
+}

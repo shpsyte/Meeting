@@ -19,7 +19,5 @@ namespace Business.Services {
 
         Task<MeetingSetup> GetAtualMeeting ();
 
-        Task<int> SaveChanges ();
-
     }
 }

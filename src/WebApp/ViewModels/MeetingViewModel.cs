@@ -13,6 +13,8 @@ namespace WebApp.ViewModels {
 
         [Required]
         public DateTime Data { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]

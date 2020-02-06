@@ -10,6 +10,10 @@ namespace Business.Validations {
             RuleFor (p => p.Email)
                 .NotEmpty ();
 
+            RuleFor (p => p.Name)
+                .NotEmpty ()
+                .WithMessage ("The Name cannot by empty");
+
             RuleFor (p => ValidEmail (p.Email))
                 .Equal (true).WithMessage ("The Email is not a valid Email.");
 

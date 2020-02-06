@@ -31,10 +31,15 @@ Todo BackEnd:
 
 
 Todo FrontEnd:
-  ☐ Gerar os controllers
-  ☐ Arrumar o controller
-  ☐ Gerar a View
-  ☐ Arrumar a View 1st 
+  ✔ Gerar os controllers @done(20-02-05 13:28)
+  ✔ Arrumar o controller @done(20-02-05 13:28)
+   ☐ Gerar a Tela Adm
+      ☐ Desenhar o esqueleto da tela
+      ☐ Criar a opção de Criar o link no Database
+      ☐ Alterar ou Criar o link desejado
+      ☐ Pegar a listagem de participantes do dia
+
+   
 
 Todo FronEnd Design:
    ☐ Alterar o designed do site
