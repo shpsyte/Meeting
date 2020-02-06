@@ -2,6 +2,13 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+function ToggleSpiner(behavior) {
+  // document.querySelector("#loading").classList.toggle("hide");
+
+  if (behavior === "hide")
+    document.querySelector("#loading").classList.add("hide");
+  else document.querySelector("#loading").classList.remove("hide");
+}
 
 function SendParticipantToServer() {
   let btn = document.querySelector("#sent");
@@ -10,6 +17,7 @@ function SendParticipantToServer() {
 
   btn.addEventListener("click", function() {
     event.preventDefault();
+    ToggleSpiner("show");
 
     let url = btn.getAttribute("data-url");
     let token = document.querySelector("input[name=__RequestVerificationToken]")
@@ -19,8 +27,16 @@ function SendParticipantToServer() {
     let data = { email, name };
 
     if (email === "") {
-      document.querySelector("span[data-valmsg-for='Email']").innerHTML =
-        "This field is required";
+      document.querySelector("#errors").innerHTML = "Email is required";
+
+      ToggleSpiner("hide");
+      return;
+    }
+
+    if (name === "") {
+      document.querySelector("#errors").innerHTML = "Name is required";
+
+      ToggleSpiner("hide");
       return;
     }
 
@@ -33,14 +49,15 @@ function error(data) {
 }
 
 function SuccessSendParticipantToServer(data) {
-  console.log(data);
-  let errors = document.querySelector("#errors");
-  let link =
-    data.atualmetting.link === null
+  let link_element = document.querySelector("#zoom_link");
+  let link = data.atualmetting.link;
+  let text =
+    link === null
       ? "The link will be provide, please wait..."
-      : data.atualmetting.link;
-
-  errors.innerHTML = link;
+      : "Enter in Class";
+  link_element.setAttribute("href", link);
+  link_element.innerHTML = text;
+  ToggleSpiner("hide");
 }
 
 /* Regras para o servidor */

@@ -1,41 +1,42 @@
 ﻿@model MeetingViewModel 
-  
-    <form asp-action="Create">
-            <div>
-                <span class="text-success" id="errors"></span>
+<div class="boxcontainter">
+    <div class="hero">
+         <form asp-antiforgery="true" >  
+            <div class="item"> 
+                <input placeholder="Name" asp-for="Name" required /> 
+                <span asp-validation-for="Name" class="text-danger"></span>  
             </div>
-             
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+            <div class="item">
+                <input placeholder="Email" asp-for="Email" required /> 
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" checked /> @Html.DisplayNameFor(model => model.Active)
-                </label>
+            <div class="item">
+                <input asp-for="Active" checked /> 
+                <label for="Active">I am Actively Participating</label>
             </div>
-
-          
-
-            <hr>
-            
-            <div class="form-group">
-                <input type="submit" data-url="@Url.Action("CreateParticipant", "Home")" value="Create" id="sent" class="btn btn-primary" />
+            <div class="item submit-area">
+                <div class="item-submit"> 
+                    <div id="loading" class="hide spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div>
+                    <input type="submit" data-url="@Url.Action("CreateParticipant", "Home")" value="get the link" id="sent" class="btn btn-primary" />
+                    </div>                     
+                </div> 
             </div>
-
-        </form>
-
+        </form> 
+        <div class="return">
+            <span class="text-danger" id="errors">   </span>
+            <div class="item link">
+                <a id="zoom_link" href="" target="_blank" rel="noopener noreferrer"> </a>
+            </div> 
+        </div>
+    </div>
+</div>
  
 @section Scripts {
       @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
       <script>
           SendParticipantToServer()
-     </script>
+     </script>  
 }

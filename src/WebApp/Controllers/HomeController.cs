@@ -24,6 +24,7 @@ namespace WebApp.Controllers {
             _meetingSetupServices = meetingSetupServices;
         }
 
+        [Route ("confirm-to-get-link")]
         public IActionResult Index () {
             return View (new MeetingViewModel ());
         }
