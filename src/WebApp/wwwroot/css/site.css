@@ -239,6 +239,11 @@ input[type="email"] {
   border-right: 1px solid #fff;
 }
 
+.stop {
+  background: #118eb8;
+  border-left: 1px solid #fff;
+}
+
 .pair .controls {
   display: flex;
   align-items: flex-start;

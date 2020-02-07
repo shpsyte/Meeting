@@ -95,6 +95,8 @@ function CreateBindToGetParticipants() {
   setTimeout(GetParticipants, 2000);
 
   let go = document.querySelector("#go");
+  let stop = document.querySelector("#stop");
+  let display = document.querySelector("#timeronscreen");
 
   go.addEventListener("click", function() {
     let mm = document.querySelector("#mm").value;
@@ -103,8 +105,7 @@ function CreateBindToGetParticipants() {
     if (mm == 0 || mm == null) mm = 0;
     if (ss == 0 || ss == null) ss = 0;
     var fiveMinutes = 60 * parseInt(mm);
-    let time = fiveMinutes + parseInt(ss),
-      display = document.querySelector("#timeronscreen");
+    let time = fiveMinutes + parseInt(ss);
     display.classList.remove("hurry");
     if (id != null) {
       clearInterval(id);
@@ -112,6 +113,13 @@ function CreateBindToGetParticipants() {
     display.innerHTML = "00:00";
 
     startTimer(time, display);
+  });
+
+  stop.addEventListener("click", function() {
+    if (id != null) {
+      clearInterval(id);
+      display.innerHTML = "00:00";
+    }
   });
 }
 
