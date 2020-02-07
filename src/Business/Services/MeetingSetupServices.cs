@@ -69,6 +69,18 @@ namespace Business.Services {
         public async Task Update (MeetingSetup entity) {
             await _meettingSetup.Update (entity);
         }
+        public async Task CreateOrUpdate (MeetingSetup entity) {
+            var meetingSetupPreviously = await GetAtualMeeting ();
+            if (meetingSetupPreviously != null) {
+                meetingSetupPreviously.Link = entity.Link;
+                await Update (meetingSetupPreviously);
+            } else {
+                var dataSmeetingSetup = await GetNewMeetingSetup ();
+                dataSmeetingSetup.Link = entity.Link;
+                await Add (dataSmeetingSetup);
+            }
+
+        }
 
         public void Dispose () {
             _meettingSetup?.Dispose ();

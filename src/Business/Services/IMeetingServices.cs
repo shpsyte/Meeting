@@ -11,8 +11,6 @@ namespace Business.Services {
         Task Update (Meeting entity);
         Task Delete (Meeting entity);
 
-        Task<Meeting> GetNewMeeting ();
-
         Task<Meeting> GetById (Guid id);
         Task<Meeting> Get (Expression<Func<Meeting, bool>> where);
         Task<IEnumerable<Meeting>> GetAll ();
@@ -20,6 +18,7 @@ namespace Business.Services {
         Task<IEnumerable<Meeting>> GetAll (Expression<Func<Meeting, bool>> where = null, Func<IQueryable<Meeting>, IOrderedQueryable<Meeting>> orderBy = null,
             string includeProperties = "");
         Task<bool> CheckIfIsAlreadyRegistered (Meeting entity);
+        Task CreateOrUpdate (Meeting entity);
         Task<IEnumerable<Meeting>> GetAllParticipantsToday ();
 
         Task<int> SaveChanges ();

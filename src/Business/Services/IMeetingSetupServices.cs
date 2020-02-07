@@ -20,6 +20,7 @@ namespace Business.Services {
         Task<MeetingSetup> GetAtualMeeting ();
 
         Task<MeetingSetup> GetNewMeetingSetup ();
+        Task CreateOrUpdate (MeetingSetup entity);
 
     }
 }

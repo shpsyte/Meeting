@@ -3,25 +3,22 @@ using AutoMapper;
 using Business.Notifications;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using static WebApp.Controllers.Services;
 
 namespace WebApp.Controllers {
     public class BaseController : Controller {
-        protected readonly IMapper _mapper;
-        protected readonly ILogger<BaseController> _Looger;
-        protected readonly INotificador _notificador;
+        protected readonly ControllersServices _services;
 
-        public BaseController (IMapper mapper, ILogger<BaseController> looger, INotificador notificador) {
-            _mapper = mapper;
-            _Looger = looger;
-            _notificador = notificador;
+        public BaseController (ControllersServices services) {
+            _services = services;
         }
 
         public bool OperacaoValida () {
-            return !_notificador.TemNotificacao ();
+            return !_services._notificador.TemNotificacao ();
         }
 
         public List<Notificacao> ErrorInModel () {
-            return _notificador.ObterNotificacao ();
+            return _services._notificador.ObterNotificacao ();
         }
 
     }

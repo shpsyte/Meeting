@@ -81,15 +81,17 @@ namespace Business.Services {
             );
         }
 
-        public async Task<Meeting> GetNewMeeting () {
-            var data = await Task.FromResult (
-                new Meeting () {
-                    Data = DateTime.UtcNow,
-                        Id = Guid.NewGuid ()
-                }
-            );
+        public async Task CreateOrUpdate (Meeting entity) {
+            var dataIfIsAlreadyRegistered =
+                (await Get (a => a.Data.ToSql () == DateTime.UtcNow.ToSql () &&
+                    a.Email == entity.Email));
 
-            return data;
+            if (dataIfIsAlreadyRegistered != null) {
+                dataIfIsAlreadyRegistered.Active = entity.Active;
+                await Update (dataIfIsAlreadyRegistered);
+            } else {
+                await Add (entity);
+            }
         }
 
     }

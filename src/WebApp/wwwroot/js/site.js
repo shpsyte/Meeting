@@ -189,13 +189,13 @@ function createpair() {
     }
   } else {
     let par1 = activesparticipants.pop();
-    let name = par1.name + " ................." + "Tacher";
+    let name = par1.name + " ................." + "Teacher";
     addLiToUl(ul, name);
   }
 
   if (activesparticipants.length == 1) {
     let par1 = activesparticipants.pop();
-    let name = par1.name + " ................." + "Tacher";
+    let name = par1.name + " ................." + "Teacher";
     addLiToUl(ul, name);
   }
 }

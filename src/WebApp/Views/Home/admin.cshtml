@@ -14,7 +14,8 @@
             <div class="pair">
         <div class="admin-list-controls">
        
-        <form Action="Create" asp-antiforgery="true" >
+        <form  asp-antiforgery="true" >
+            
              <input type="button" data-url="@Url.Action("CreateLinkMeeting", "Home")" value="Update Link Zoom" id="sent"   />
              <input asp-for="Link"/>
            
@@ -23,8 +24,7 @@
          </div></div>
         <div class="pair">
             <div class="controls">
-                
-                <button class="cbtn v2" id="createpair" >create Pair</button>                
+                    <button class="cbtn v2" id="createpair" >create Pair</button>             
             </div>
             <ul id="pairparticipants"> 
                     

@@ -7,7 +7,7 @@ using Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using static WebApp.Controllers.Services;
 
 namespace WebApp.Configs {
     public static class InjectionDependencyConfig {
@@ -23,6 +23,7 @@ namespace WebApp.Configs {
             services.AddScoped<IMeetingSetupServices, MeetingSetupServices> ();
 
             services.AddScoped<INotificador, Notificador> ();
+            services.AddScoped<ControllersServices> ();
 
             return services;
         }
