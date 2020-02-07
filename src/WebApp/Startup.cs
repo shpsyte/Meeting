@@ -52,6 +52,7 @@ namespace WebApp {
 
             app.UseSignalR (routes => {
                 routes.MapHub<newParticipantHub> ("/newParticipantHub");
+                routes.MapHub<newLinkHub> ("/newLinkHub");
             });
 
             app.UseMvc (routes => {

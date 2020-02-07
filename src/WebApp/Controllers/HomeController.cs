@@ -62,6 +62,10 @@ namespace WebApp.Controllers {
         public async Task<JsonResult> CreateLinkMeeting (MeetingSetupViewModel meetingSetup) {
             await _services._meetingSetupServices.CreateOrUpdate (_services._mapper.Map<MeetingSetup> (meetingSetup));
 
+            //  hm, talvez criar uma classe especializada aqui....
+            if (!string.IsNullOrWhiteSpace (meetingSetup.Link))
+                await _services._linkHub.Clients.All.SendAsync ("UpdateLink", meetingSetup.Link);
+
             return Json (new {
                 success = OperacaoValida (),
                     errors = ErrorInModel (),

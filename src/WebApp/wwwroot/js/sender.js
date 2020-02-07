@@ -34,6 +34,10 @@ connection.on("SendMessage", function(data) {
     if (ul === null) return;
     let li = document.createElement("li");
     li.appendChild(document.createTextNode(data.name));
+
+    if (!data.active) {
+      li.classList.add("inactive");
+    }
     ul.appendChild(li);
 
     document.querySelector("#players").innerHTML =

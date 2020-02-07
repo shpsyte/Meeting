@@ -18,5 +18,13 @@
       "enabled": true,
       "renameLocals": true
     }
+  },
+  {
+    "outputFileName": "wwwroot/js/link-listener.min.js",
+    "inputFiles": ["wwwroot/js/LinkListeners.js"],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
   }
 ]

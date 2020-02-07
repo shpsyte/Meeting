@@ -25,19 +25,22 @@ namespace WebApp.Controllers {
             public ILogger<BaseController> _Looger;
             public INotificador _notificador;
             public IHubContext<newParticipantHub> _signalRContext;
+            public IHubContext<newLinkHub> _linkHub;
 
             public ControllersServices (
                 IMeetingServices meetingServices,
                 IMeetingSetupServices meetingSetupServices,
                 IMapper mapper,
                 ILogger<BaseController> looger, INotificador notificador,
-                IHubContext<newParticipantHub> signalRContext) {
+                IHubContext<newParticipantHub> signalRContext,
+                IHubContext<newLinkHub> linkHub) {
                 _meetingServices = meetingServices;
                 _meetingSetupServices = meetingSetupServices;
                 _mapper = mapper;
                 _Looger = looger;
                 _notificador = notificador;
                 _signalRContext = signalRContext;
+                _linkHub = linkHub;
 
             }
 

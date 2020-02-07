@@ -35,10 +35,11 @@
                 <a id="zoom_link" href="" target="_blank" rel="noopener noreferrer"> </a>
             </div> 
         </div>
-    </div>
+    </div> 
 </div>
  
 @section Scripts {
       @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-      <script> SendParticipantToServer() </script>  
+      <script> SendParticipantToServer() </script> 
+      <script src="~/js/link-listener.js"></script>
 }
