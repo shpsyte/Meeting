@@ -200,8 +200,6 @@ input[type="email"] {
 
 .admin-box-container .admin-control form {
   display: flex;
-  width: 70%;
-  flex: 0;
 }
 .msg {
   height: 0px;
@@ -238,6 +236,7 @@ input[type="email"] {
   font-weight: bold;
   font-size: 14px;
   text-transform: uppercase;
+  border-right: 1px solid #fff;
 }
 
 .pair .controls {
@@ -255,13 +254,13 @@ input[type="email"] {
   padding-right: 12px;
 }
 
-.pair ul {
+.admin-control ul {
   list-style: none;
 }
 
-.pair ul li {
+.admin-control ul li {
   background: #ffffff;
-  padding: 6px 2px;
+  padding: 1px 2px;
 }
 
 footer {
@@ -273,8 +272,63 @@ footer {
   line-height: 60px;
 }
 
+.timer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e6ecf0;
+  margin-top: 1px;
+  margin-bottom: 10px;
+}
+.hurry {
+  animation: blinkingText 0.5s infinite;
+}
+@keyframes blinkingText {
+  0% {
+    color: #b52e31;
+  }
+  49% {
+    color: #b52e31;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
+}
+
+#timeronscreen {
+  color: #b52e31;
+  font-size: 55px;
+}
+
+.timer div {
+  flex: 1;
+}
+
+.timer .minutes {
+  display: flex;
+}
+
+.timer .minutes input {
+  width: 100px;
+}
+
+.timed {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 800px) {
-  .admin-list-controls {
-    display: none;
+  .hide-on-mobile {
+    display: none !important;
   }
 }

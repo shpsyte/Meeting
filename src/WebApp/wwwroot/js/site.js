@@ -85,6 +85,7 @@ function CreateLinkToServer() {
   });
 }
 
+var id = null;
 function CreateBindToGetParticipants() {
   //let btn = document.querySelector("#getparticipants");
 
@@ -96,14 +97,55 @@ function CreateBindToGetParticipants() {
   //   ToggleSpiner("hide");
   // });
 
-  setInterval(GetParticipants, 5000);
+  // setInterval(GetParticipants, 5000);
+
+  let go = document.querySelector("#go");
+
+  go.addEventListener("click", function() {
+    let mm = document.querySelector("#mm").value;
+    let ss = document.querySelector("#ss").value;
+
+    if (mm == 0 || mm == null) mm = 0;
+    if (ss == 0 || ss == null) ss = 0;
+    var fiveMinutes = 60 * parseInt(mm);
+    let time = fiveMinutes + parseInt(ss),
+      display = document.querySelector("#timeronscreen");
+    display.classList.remove("hurry");
+    if (id != null) {
+      clearInterval(id);
+    }
+    display.innerHTML = "00:00";
+    console.log(fiveMinutes, time, ss);
+
+    startTimer(time, display);
+  });
+}
+
+function startTimer(duration, display) {
+  var timer = duration,
+    minutes,
+    seconds;
+  id = setInterval(function() {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    display.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      document.querySelector("#timeronscreen").classList.add("hurry");
+      clearInterval(id);
+    }
+  }, 1000);
 }
 
 function SuccessCreateLinkToServer(data) {
   let link = document.querySelector("#Link");
   let errors = document.querySelector("#errors");
   if (data.success) {
-    errors.innerHTML = "Link create/updated with success";
+    errors.innerHTML = "done..";
     link.value = data.meetingSetup.link;
   } else {
     errors.innerHTML = data.errors[0].message;
@@ -150,13 +192,14 @@ function SuccessGetParticipantes(data) {
   }
   let total = participants.length;
 
-  document.querySelector("#players").innerHTML = "Player" + "(" + total + ")";
+  document.querySelector("#players").innerHTML = "Players" + "(" + total + ")";
 }
 
 function CreateBindToCreatePair() {
   let btn = document.querySelector("#createpair");
 
   btn.addEventListener("click", function() {
+    event.preventDefault();
     ToggleSpiner("show");
     createpair();
     ToggleSpiner("hide");
@@ -209,15 +252,15 @@ function addLiToUl(ul, text) {
 function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue,
-    randomIndex;
+    rIndex;
 
   while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
+    rIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
     temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+    array[currentIndex] = array[rIndex];
+    array[rIndex] = temporaryValue;
   }
 
   return array;
