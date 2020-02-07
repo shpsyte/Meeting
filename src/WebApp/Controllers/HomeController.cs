@@ -7,6 +7,7 @@ using Business.Models;
 using Business.Notifications;
 using Business.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using WebApp.ViewModels;
 using static WebApp.Controllers.Services;
@@ -45,8 +46,10 @@ namespace WebApp.Controllers {
             var meetingSetup =
                 (await _services._meetingSetupServices.GetAtualMeeting ()) ?? new MeetingSetup ();
 
+            //await _services._signalRContext.Clients.All.SendAsync ("SendMessage", meetingViewModel);
+
             return Json (new {
-                    success = OperacaoValida (),
+                success = OperacaoValida (),
                     errors = ErrorInModel (),
                     data = meetingViewModel,
                     atualmetting = meetingSetup

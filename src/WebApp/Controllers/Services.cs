@@ -2,7 +2,9 @@ using System;
 using AutoMapper;
 using Business.Notifications;
 using Business.Services;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using WebApp.Hubs;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers {
@@ -22,17 +24,20 @@ namespace WebApp.Controllers {
 
             public ILogger<BaseController> _Looger;
             public INotificador _notificador;
+            public IHubContext<newParticipantHub> _signalRContext;
 
             public ControllersServices (
                 IMeetingServices meetingServices,
                 IMeetingSetupServices meetingSetupServices,
                 IMapper mapper,
-                ILogger<BaseController> looger, INotificador notificador) {
+                ILogger<BaseController> looger, INotificador notificador,
+                IHubContext<newParticipantHub> signalRContext) {
                 _meetingServices = meetingServices;
                 _meetingSetupServices = meetingSetupServices;
                 _mapper = mapper;
                 _Looger = looger;
                 _notificador = notificador;
+                _signalRContext = signalRContext;
 
             }
 
