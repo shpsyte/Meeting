@@ -35,7 +35,7 @@ namespace Business.Services {
 
         public async Task<MeetingSetup> GetAtualMeeting () {
 
-            return (await GetAll (a => a.Data.ToSql () == DateTime.Now.ToSql ())).FirstOrDefault ();
+            return (await GetAll (a => a.Data.ToSql () == DateTime.UtcNow.ToSql ())).FirstOrDefault ();
         }
 
         public async Task<MeetingSetup> GetNewMeetingSetup () {

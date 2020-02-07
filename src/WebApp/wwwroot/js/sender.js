@@ -13,20 +13,30 @@ connection
     return console.error(err.toString());
   });
 
-function NotifyNewParticipant(name, email) {
-  connection.invoke("SendMessage", name, email).catch(function(err) {
+function NotifyNewParticipant(data) {
+  connection.invoke("SendMessage", data).catch(function(err) {
     return console.error(err.toString());
   });
 }
 
-connection.on("SendMessage", function(user, email) {
-  participants.push(user);
-  let ul = document.querySelector("#participants");
-  if (ul === null) return;
-  let li = document.createElement("li");
-  li.appendChild(document.createTextNode(user));
-  ul.appendChild(li);
+connection.on("SendMessage", function(data) {
+  var registrado = false;
+  for (const iterator of participants) {
+    if (iterator.name === data.name && iterator.email === data.email) {
+      registrado = true;
+    }
+  }
 
-  document.querySelector("#players").innerHTML =
-    "Players" + "(" + participants.length + ")";
+  if (!registrado) {
+    participants.push(data);
+
+    let ul = document.querySelector("#participants");
+    if (ul === null) return;
+    let li = document.createElement("li");
+    li.appendChild(document.createTextNode(data.name));
+    ul.appendChild(li);
+
+    document.querySelector("#players").innerHTML =
+      "Players" + "(" + participants.length + ")";
+  }
 });

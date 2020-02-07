@@ -68,7 +68,7 @@ function SuccessSendParticipantToServer(data) {
   link_element.innerHTML = text;
   ToggleSpiner("hide");
 
-  NotifyNewParticipant(data.data.name, data.data.email);
+  NotifyNewParticipant(data.data);
 }
 
 /* Regras para o servidor */
@@ -162,13 +162,6 @@ function SuccessGetParticipantes(data) {
   participants = [];
 
   let participantsjson = data.data;
-
-  if (data.data.length === 0) {
-    let li = document.createElement("li");
-    let text = document.createTextNode("Ow now... nobody here.... ;(");
-    li.appendChild(text);
-    ul.appendChild(li);
-  }
 
   for (const participant of participantsjson) {
     participants.push(participant);
