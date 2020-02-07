@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Business.Extensions;
 using Business.Models;
 using Business.Notifications;
 using Business.Services;
@@ -16,6 +17,7 @@ namespace WebApp.Controllers {
         private readonly IMeetingSetupServices _meetingSetupServices;
 
         // TODO:  Create a class to inject here... too much inject....
+        
         public HomeController (IMeetingServices meetingServices,
             IMeetingSetupServices meetingSetupServices,
             IMapper mapper,
@@ -24,16 +26,16 @@ namespace WebApp.Controllers {
             _meetingSetupServices = meetingSetupServices;
         }
 
+        [Route ("")]
         [Route ("confirm-to-get-link")]
         public IActionResult Index () {
             return View (new MeetingViewModel ());
         }
 
         [HttpPost]
+        [Route ("create-participant")]
         public async Task<IActionResult> CreateParticipant (MeetingViewModel meetingViewModel) {
 
-            ModelState.Remove ("Data");
-            ModelState.Remove ("Id");
             var meetingSetup =
                 (await _meetingSetupServices.GetAtualMeeting ()) ?? new MeetingSetup ();
 
@@ -46,9 +48,16 @@ namespace WebApp.Controllers {
             }
 
             /// TODO: should be in Services
-            if (await _meetingServices.CheckIfIsAlreadyRegistered (_mapper.Map<Meeting> (meetingViewModel))) {
+            var dataIfIsAlreadyRegistered =
+                (await _meetingServices.Get (a => a.Data.ToSql () == DateTime.UtcNow.ToSql () &&
+                    a.Email == meetingViewModel.Email));
+
+            if (dataIfIsAlreadyRegistered != null) {
+                dataIfIsAlreadyRegistered.Active = meetingViewModel.Active;
+                await _meetingServices.Update (dataIfIsAlreadyRegistered);
+
                 return Json (new {
-                    success = true, data = meetingViewModel, atualmetting = meetingSetup
+                    success = true, data = dataIfIsAlreadyRegistered, atualmetting = meetingSetup
                 });
             }
 
@@ -66,11 +75,13 @@ namespace WebApp.Controllers {
 
         }
 
-        public async Task<IActionResult> Adm () {
+        [Route ("admin-class-participant")]
+        public async Task<IActionResult> admin () {
             return View (_mapper.Map<MeetingSetupViewModel> (await _meetingSetupServices.GetAtualMeeting ()));
         }
 
         [HttpPost]
+        [Route ("create-link-class")]
         public async Task<JsonResult> CreateLinkMeeting (MeetingSetupViewModel meetingSetup) {
 
             var meetingSetupPreviously = await _meetingSetupServices.GetAtualMeeting ();
@@ -99,6 +110,7 @@ namespace WebApp.Controllers {
 
         }
 
+        [Route ("get-participant")]
         public async Task<JsonResult> GetParticipants () {
             return Json (new { success = true, data = (await _meetingServices.GetAllParticipantsToday ()) });
         }

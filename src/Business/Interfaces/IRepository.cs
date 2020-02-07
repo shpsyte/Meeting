@@ -12,6 +12,7 @@ namespace Business.Interfaces {
         Task Delete (T entity);
 
         Task<T> GetById (Guid id);
+        Task<T> Get (Expression<Func<T, bool>> where);
         Task<IEnumerable<T>> GetAll ();
         Task<IEnumerable<T>> GetAll (Expression<Func<T, bool>> where);
         Task<IEnumerable<T>> GetAll (Expression<Func<T, bool>> where = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,

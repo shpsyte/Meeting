@@ -1,0 +1,45 @@
+﻿@model MeetingSetupViewModel 
+<div class="admin-box-container">
+    <div class="admin-list">
+        <div class="admin-list-controls">
+             <div id="loading" class="hide spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+            <h4 id="players">Players</h4>
+           <input style="display:none" type="button" class="cbtn mini" data-url="@Url.Action("GetParticipants", "Home")"  value="Update" id="getparticipants"   />  
+        </div>
+        <ul id="participants"> </ul>
+    </div>
+    <div class="admin-control">
+            <div class="pair">
+        <div class="admin-list-controls">
+       
+        <form Action="Create" asp-antiforgery="true" >
+             <input type="button" data-url="@Url.Action("CreateLinkMeeting", "Home")" value="Update Link Zoom" id="sent"   />
+             <input asp-for="Link"/>
+           
+             <span class="text-success msg" id="errors"></span>
+        </form>
+         </div></div>
+        <div class="pair">
+            <div class="controls">
+                
+                <button class="cbtn v2" id="createpair" >create Pair</button>                
+            </div>
+            <ul id="pairparticipants"> 
+                    
+
+            </ul>
+        </div>
+
+
+
+    </div>
+</div>
+@section Scripts {
+      <script>
+          CreateLinkToServer()
+          CreateBindToGetParticipants();
+          CreateBindToCreatePair();
+     </script>
+}

@@ -42,6 +42,10 @@ namespace Data.Repositories {
             return await _DbSet.ToListAsync ();
         }
 
+        public async Task<T> Get (Expression<Func<T, bool>> where) {
+            return await _DbSet.Where (where).FirstOrDefaultAsync ();
+        }
+
         public async Task<IEnumerable<T>> GetAll (Expression<Func<T, bool>> where) {
             return await _DbSet.Where (where).ToListAsync ();
         }

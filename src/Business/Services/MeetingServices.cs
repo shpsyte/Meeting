@@ -52,6 +52,11 @@ namespace Business.Services {
             return await _meeting.GetById (id);
         }
 
+        public async Task<Meeting> Get (Expression<Func<Meeting, bool>> where) {
+            return await _meeting.Get (where);
+
+        }
+
         public async Task<int> SaveChanges () {
             return await _meeting.SaveChanges ();
         }
@@ -65,11 +70,15 @@ namespace Business.Services {
         }
 
         public async Task<bool> CheckIfIsAlreadyRegistered (Meeting entity) {
-            return (await GetAll (a => a.Data.ToSql () == DateTime.Now.ToSql () && a.Email == entity.Email)).Any ();
+            return (await GetAll (a => a.Data.ToSql () == DateTime.UtcNow.ToSql () && a.Email == entity.Email)).Any ();
         }
 
         public async Task<IEnumerable<Meeting>> GetAllParticipantsToday () {
-            return (await GetAll (a => a.Data.ToSql () == DateTime.Now.ToSql ()));
+            return (
+                (await GetAll (a => a.Data.ToSql () == DateTime.UtcNow.ToSql ()))
+                .OrderByDescending (a => a.Active).ThenBy (a => a.Name)
+
+            );
         }
 
         public async Task<Meeting> GetNewMeeting () {

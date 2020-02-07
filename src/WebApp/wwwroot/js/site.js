@@ -1,5 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿let participants = [];
 
 // Write your JavaScript code.
 function ToggleSpiner(behavior) {
@@ -11,6 +10,11 @@ function ToggleSpiner(behavior) {
 }
 
 function SendParticipantToServer() {
+  let chck = document.querySelector("#AcitveP");
+  chck.addEventListener("click", function() {
+    document.querySelector("#Active").value = this.checked;
+  });
+
   let btn = document.querySelector("#sent");
 
   if (btn === null) return;
@@ -24,7 +28,8 @@ function SendParticipantToServer() {
       .value;
     let email = document.querySelector("#Email").value;
     let name = document.querySelector("#Name").value;
-    let data = { email, name };
+    let active = document.querySelector("#Active").value;
+    let data = { email, name, active };
 
     if (email === "") {
       document.querySelector("#errors").innerHTML = "Email is required";
@@ -81,14 +86,17 @@ function CreateLinkToServer() {
 }
 
 function CreateBindToGetParticipants() {
-  let btn = document.querySelector("#getparticipants");
-  btn.setAttribute("disabled", "disabled");
+  //let btn = document.querySelector("#getparticipants");
 
   setTimeout(GetParticipants, 2000);
-  btn.addEventListener("click", () => {
-    event.preventDefault();
-    GetParticipants();
-  });
+  // btn.addEventListener("click", () => {
+  //   event.preventDefault();
+  //   ToggleSpiner("show");
+  //   GetParticipants();
+  //   ToggleSpiner("hide");
+  // });
+
+  setInterval(GetParticipants, 5000);
 }
 
 function SuccessCreateLinkToServer(data) {
@@ -99,43 +107,124 @@ function SuccessCreateLinkToServer(data) {
     link.value = data.meetingSetup.link;
   } else {
     errors.innerHTML = data.errors[0].message;
-    // console.log("Algo deu errado --> ", data.errors[0].message);
   }
+
+  setTimeout(function() {
+    errors.innerHTML = "";
+  }, 1500);
 }
 
 function GetParticipants() {
   let btn = document.querySelector("#getparticipants");
-
-  btn.setAttribute("disabled", "disabled");
-
-  let url = "/Home/GetParticipants/";
+  let url = btn.getAttribute("data-url");
   _get(url, SuccessGetParticipantes, error);
-
-  btn.removeAttribute("disabled");
 }
 
 function SuccessGetParticipantes(data) {
-  let participants = data.data;
-  console.log(data);
-
   let ul = document.querySelector("#participants");
   ul.innerHTML = "";
-  for (const participant of participants) {
-    let li = document.createElement("li");
+  participants = [];
 
-    if (!participant.active) {
-      li.classList.add("inactive");
-    }
-    let text = document.createTextNode(
-      participant.name === null ? participant.email : participant.name
-    );
+  let participantsjson = data.data;
+
+  if (data.data.length === 0) {
+    let li = document.createElement("li");
+    let text = document.createTextNode("Ow now... nobody here.... ;(");
     li.appendChild(text);
     ul.appendChild(li);
   }
+
+  for (const participant of participantsjson) {
+    participants.push(participant);
+
+    let li = document.createElement("li");
+    let text = document.createTextNode(
+      participant.name === null ? participant.email : participant.name
+    );
+    if (!participant.active) {
+      li.classList.add("inactive");
+    }
+
+    li.appendChild(text);
+    ul.appendChild(li);
+  }
+  let total = participants.length;
+
+  document.querySelector("#players").innerHTML = "Player" + "(" + total + ")";
+}
+
+function CreateBindToCreatePair() {
+  let btn = document.querySelector("#createpair");
+
+  btn.addEventListener("click", function() {
+    ToggleSpiner("show");
+    createpair();
+    ToggleSpiner("hide");
+  });
+}
+
+function createpair() {
+  let activesparticipants = [];
+  let ul = document.querySelector("#pairparticipants");
+  ul.innerHTML = "";
+  for (const participant of participants) {
+    if (participant.active) activesparticipants.push(participant);
+  }
+  let total = activesparticipants.length;
+
+  if (total == 0) {
+    addLiToUl(ul, "Ow not... nobody here ... ;(");
+    return;
+  }
+
+  if (total >= 2) {
+    for (let index = 0; index < Math.floor(total / 2); index++) {
+      activesparticipants = shuffle(activesparticipants);
+      let par1 = activesparticipants.pop();
+      activesparticipants = shuffle(activesparticipants);
+      let par2 = activesparticipants.pop();
+      // console.log(index, activesparticipants.length, activesparticipants);
+      let name = par1.name + "   .................   " + par2.name;
+      addLiToUl(ul, name);
+    }
+  } else {
+    let par1 = activesparticipants.pop();
+    let name = par1.name + " ................." + "Tacher";
+    addLiToUl(ul, name);
+  }
+
+  if (activesparticipants.length == 1) {
+    let par1 = activesparticipants.pop();
+    let name = par1.name + " ................." + "Tacher";
+    addLiToUl(ul, name);
+  }
+}
+
+function addLiToUl(ul, text) {
+  let li = document.createElement("li");
+  li.appendChild(document.createTextNode(text));
+  ul.appendChild(li);
+}
+
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 function _get(url, callback, errorcallback) {
-  console.log("Getting data....", url);
+  // console.log("Getting data....", url);
   $.ajax({
     type: "GET",
     url: url,

@@ -47,12 +47,6 @@ header#main-header nav ul li {
 header#main-header nav ul li:first-child {
   margin-left: 0;
 }
-/* 
-main .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
 
 .boxcontainter {
   margin: 12px 0;
@@ -110,11 +104,9 @@ input[type="email"] {
   border: 0;
   border-radius: 16px;
   color: #fff;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-weight: bold;
   font-size: 14px;
   border: 0;
@@ -150,92 +142,139 @@ input[type="email"] {
   flex: 1;
 }
 
+.admin-box-container {
+  display: flex;
+}
+
+.admin-box-container div {
+  padding: 12px 5px !important;
+}
+
+.admin-box-container .admin-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 12px;
+  width: 30%;
+  border-radius: 2px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+}
+.admin-list-controls {
+  display: flex;
+}
+
+.cbtn {
+  height: 44px;
+  padding: 10px;
+  background: #3bb9e3;
+  border: 0;
+  border-radius: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.admin-box-container .admin-list ul {
+  flex: 1;
+  list-style: none;
+  width: 100%;
+}
+
+.admin-box-container .admin-list ul li {
+  background: #ffffff;
+  padding: 2px;
+  border: 1px dotted #00b3e6;
+}
+
+.admin-box-container .admin-control {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 12px 12px;
+}
+
+.admin-box-container .admin-control form {
+  display: flex;
+  width: 70%;
+  flex: 0;
+}
+.msg {
+  height: 0px;
+  transition: height 1s;
+}
+
+.inactive {
+  color: #832544;
+
+  text-decoration: underline line-through;
+}
+.admin-box-container .admin-control form input[type="text"] {
+  width: 350px;
+  padding: 0 12px;
+  flex: 1;
+  background: #f5f8fa;
+  border: 1px solid #e6ecf0;
+  padding: 0 12px;
+  color: #1f2523;
+  font-weight: 100;
+}
+
+.admin-box-container .admin-control form input[type="button"],
+.v2 {
+  height: 44px;
+  padding: 10px;
+  background: #3bb9e3;
+  border: 0;
+  border-radius: 0px !important;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.pair .controls {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.pair {
+  display: flex;
+  flex-direction: column;
+}
+
+.pair h4 {
+  padding-right: 12px;
+}
+
+.pair ul {
+  list-style: none;
+}
+
+.pair ul li {
+  background: #ffffff;
+  padding: 6px 2px;
+}
+
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-
   height: 60px;
   line-height: 60px;
 }
 
-/*
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
- 
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
+@media (max-width: 800px) {
+  .admin-list-controls {
+    display: none;
   }
 }
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
- 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-   
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-   
-  height: 60px;
-  line-height: 60px;  
-}
-*/
-
-/* 
-.container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-main {
-  width: 100%;
-}
-
-.side {
-  flex-basis: 100%;
-  flex: 1;
-}
-
-.admin {
-  background: #f0fcf8;
-  padding: 15px;
-}
-
-.participantes {
-  background: #a9e4d0;
-  padding: 15px;
-} */

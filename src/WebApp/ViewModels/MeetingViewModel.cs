@@ -5,9 +5,10 @@ namespace WebApp.ViewModels {
     public class MeetingViewModel {
 
         public MeetingViewModel () {
-            this.Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid ();
 
             this.Data = DateTime.UtcNow;
+            this.Active = true;
         }
 
         [Key]

@@ -11,8 +11,12 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="item">
-                <input asp-for="Active" checked /> 
-                <label for="Active">I am Actively Participating</label>
+                <input type="hidden" value="true" asp-for="Active"/>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" checked="checked" class="custom-control-input"  name="AcitveP" id="AcitveP">
+                    <label class="custom-control-label" for="AcitveP">Actively Participating in the class</label>
+                </div>
+
             </div>
             <div class="item submit-area">
                 <div class="item-submit"> 
