@@ -1,12 +1,16 @@
-﻿let participants = [];
+﻿var participants = [];
+var id = null;
 
-// Write your JavaScript code.
 function ToggleSpiner(behavior) {
-  // document.querySelector("#loading").classList.toggle("hide");
-
   if (behavior === "hide")
     document.querySelector("#loading").classList.add("hide");
   else document.querySelector("#loading").classList.remove("hide");
+}
+
+function Init() {
+  CreateLinkToServer();
+  CreateBindToGetParticipants();
+  CreateBindToCreatePair();
 }
 
 function SendParticipantToServer() {
@@ -63,6 +67,8 @@ function SuccessSendParticipantToServer(data) {
   link_element.setAttribute("href", link);
   link_element.innerHTML = text;
   ToggleSpiner("hide");
+
+  NotifyNewParticipant(data.data.name, data.data.email);
 }
 
 /* Regras para o servidor */
@@ -85,19 +91,8 @@ function CreateLinkToServer() {
   });
 }
 
-var id = null;
 function CreateBindToGetParticipants() {
-  //let btn = document.querySelector("#getparticipants");
-
   setTimeout(GetParticipants, 2000);
-  // btn.addEventListener("click", () => {
-  //   event.preventDefault();
-  //   ToggleSpiner("show");
-  //   GetParticipants();
-  //   ToggleSpiner("hide");
-  // });
-
-  // setInterval(GetParticipants, 5000);
 
   let go = document.querySelector("#go");
 
@@ -115,7 +110,6 @@ function CreateBindToGetParticipants() {
       clearInterval(id);
     }
     display.innerHTML = "00:00";
-    console.log(fiveMinutes, time, ss);
 
     startTimer(time, display);
   });
@@ -226,7 +220,6 @@ function createpair() {
       let par1 = activesparticipants.pop();
       activesparticipants = shuffle(activesparticipants);
       let par2 = activesparticipants.pop();
-      // console.log(index, activesparticipants.length, activesparticipants);
       let name = par1.name + "   .................   " + par2.name;
       addLiToUl(ul, name);
     }
@@ -267,7 +260,6 @@ function shuffle(array) {
 }
 
 function _get(url, callback, errorcallback) {
-  // console.log("Getting data....", url);
   $.ajax({
     type: "GET",
     url: url,
@@ -282,7 +274,6 @@ function _get(url, callback, errorcallback) {
 }
 
 function _post(url, token, data, callback, errorcallback) {
-  console.log("Posting data....", url, data);
   $.ajax({
     type: "POST",
     headers: {

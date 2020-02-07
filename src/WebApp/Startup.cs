@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Configs;
 using WebApp.Data;
+using WebApp.Hubs;
 
 namespace WebApp {
     public class Startup {
@@ -49,11 +50,16 @@ namespace WebApp {
 
             app.UseAuthentication ();
 
+            app.UseSignalR (routes => {
+                routes.MapHub<newParticipantHub> ("/newParticipantHub");
+            });
+
             app.UseMvc (routes => {
                 routes.MapRoute (
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

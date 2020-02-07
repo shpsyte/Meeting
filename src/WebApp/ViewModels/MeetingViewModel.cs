@@ -24,5 +24,6 @@ namespace WebApp.ViewModels {
         [DataType (DataType.EmailAddress)]
         public string Email { get; set; }
         public bool Active { get; set; }
+
     }
 }

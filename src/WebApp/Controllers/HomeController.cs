@@ -46,7 +46,7 @@ namespace WebApp.Controllers {
                 (await _services._meetingSetupServices.GetAtualMeeting ()) ?? new MeetingSetup ();
 
             return Json (new {
-                success = OperacaoValida (),
+                    success = OperacaoValida (),
                     errors = ErrorInModel (),
                     data = meetingViewModel,
                     atualmetting = meetingSetup

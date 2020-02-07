@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using WebApp.Hubs;
 
 namespace WebApp.Configs {
   public static class MVCConfig {
@@ -8,6 +9,8 @@ namespace WebApp.Configs {
       services.AddMvc (a => {
         a.Filters.Add (new AutoValidateAntiforgeryTokenAttribute ());
       }).SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
+
+      services.AddSignalR ();
 
       return services;
     }
