@@ -1,4 +1,5 @@
 "use strict";
+// hubs
 
 var connection = new signalR.HubConnectionBuilder()
   .withUrl("/newParticipantHub")
