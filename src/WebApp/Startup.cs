@@ -35,31 +35,14 @@ namespace WebApp {
         }
 
         public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
-            if (env.IsDevelopment ()) {
-                app.UseDeveloperExceptionPage ();
-                app.UseDatabaseErrorPage ();
-            } else {
-                app.UseExceptionHandler ("/Home/500");
-                app.UseStatusCodePagesWithReExecute ("/Home/{0}");
-                app.UseHsts ();
-            }
-
+            app.AddEnvConfig (env);
             app.UseHttpsRedirection ();
             app.UseStaticFiles ();
             app.UseCookiePolicy ();
-
+            // todo: MigrateDB with two context....
+            //DBInitializer.SeedData (context);
             app.UseAuthentication ();
-
-            app.UseSignalR (routes => {
-                routes.MapHub<newParticipantHub> ("/newParticipantHub");
-                routes.MapHub<newLinkHub> ("/newLinkHub");
-            });
-
-            app.UseMvc (routes => {
-                routes.MapRoute (
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.AddRouteConfig ();
 
         }
     }
